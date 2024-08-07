@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="cars-container">
+    <h1>All Cars</h1>
+    {% if cars %}
+        <ul class="car-list">
+        {% for car in cars %}
+            <li class="car-item">
+                <h2>{{ car.year }} {{ car.make }} {{ car.model }}</h2>
+                <p>{{ car.description }}</p>
+                <a href="{{ url_for('cars.edit_car', car_id=car.id) }}">Edit</a>
+                <a href="{{ url_for('cars.delete_car', car_id=car.id) }}">Delete</a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No cars found in the inventory.</p>
+    {% endif %}
+    <a href="{{ url_for('cars.add_car') }}" class="add-car-btn">Add a New Car</a>
+</div>
+{% endblock %}

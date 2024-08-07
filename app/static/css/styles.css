@@ -1,0 +1,130 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+}
+
+.nav-icon {
+    height: 30px;
+    margin-right: 10px;
+}
+
+.site-title {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+.content-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    overflow: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.profile-container, .home-container, .cars-index-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.page-image {
+    max-width: 80%;
+    height: auto;
+    margin: 20px 0;
+    display: block;
+}
+
+@media (max-width: 600px) {
+    .profile-container, .home-container, .cars-index-container {
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: 1.5em;
+    }
+}
+
+.cars-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.car-list {
+    list-style: none;
+    padding: 0;
+}
+
+.car-item {
+    background-color: #f4f4f4;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.car-item h2 {
+    margin-top: 0;
+}
+
+.add-car-btn {
+    display: inline-block;
+    background-color: #333;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.add-car-btn:hover {
+    background-color: #555;
+}

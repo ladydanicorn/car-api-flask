@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Inventory</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="{{ url_for('static', filename='images/Transporatation-ic-car@4x.png') }}" alt="Site Icon" class="nav-icon">
+                <span class="site-title">Car Inventory</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('cars.index') }}">Cars</a></li>
+                <li><a href="{{ url_for('auth.profile') }}">Profile</a></li>
+                <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+                <li><a href="{{ url_for('auth.signup') }}">Register</a></li>
+                <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content-container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
