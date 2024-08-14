@@ -33,14 +33,30 @@ def api_login():
 @bp.route('/cars', methods=['GET'])
 @token_required
 def get_cars(current_user):
-    cars = Car.query.filter_by(user_id=current_user.id).all()
+    cars = Car.query.all()  # This will return all cars
     return jsonify([{
         'id': car.id,
         'make': car.make,
         'model': car.model,
         'year': car.year,
-        'description': car.description
+        'description': car.description,
+        'owner': car.owner.username
     } for car in cars])
+
+@bp.route('/cars/<string:car_id>', methods=['GET'])
+@token_required
+def get_car(current_user, car_id):
+    car = Car.query.get(car_id)
+    if not car:
+        return jsonify({'message': 'Car not found'}), 404
+    return jsonify({
+        'id': car.id,
+        'make': car.make,
+        'model': car.model,
+        'year': car.year,
+        'description': car.description,
+        'owner': car.owner.username
+    })
 
 @bp.route('/cars', methods=['POST'])
 @token_required
@@ -60,29 +76,18 @@ def create_car(current_user):
         'make': new_car.make,
         'model': new_car.model,
         'year': new_car.year,
-        'description': new_car.description
+        'description': new_car.description,
+        'owner': current_user.username
     }), 201
-
-@bp.route('/cars/<string:car_id>', methods=['GET'])
-@token_required
-def get_car(current_user, car_id):
-    car = Car.query.filter_by(id=car_id, user_id=current_user.id).first()
-    if not car:
-        return jsonify({'message': 'Car not found'}), 404
-    return jsonify({
-        'id': car.id,
-        'make': car.make,
-        'model': car.model,
-        'year': car.year,
-        'description': car.description
-    })
 
 @bp.route('/cars/<string:car_id>', methods=['PUT'])
 @token_required
 def update_car(current_user, car_id):
-    car = Car.query.filter_by(id=car_id, user_id=current_user.id).first()
+    car = Car.query.get(car_id)
     if not car:
         return jsonify({'message': 'Car not found'}), 404
+    if car.user_id != current_user.id:
+        return jsonify({'message': 'Unauthorized to update this car'}), 403
     
     data = request.json
     car.make = data.get('make', car.make)
@@ -96,15 +101,18 @@ def update_car(current_user, car_id):
         'make': car.make,
         'model': car.model,
         'year': car.year,
-        'description': car.description
+        'description': car.description,
+        'owner': current_user.username
     })
 
 @bp.route('/cars/<string:car_id>', methods=['DELETE'])
 @token_required
 def delete_car(current_user, car_id):
-    car = Car.query.filter_by(id=car_id, user_id=current_user.id).first()
+    car = Car.query.get(car_id)
     if not car:
         return jsonify({'message': 'Car not found'}), 404
+    if car.user_id != current_user.id:
+        return jsonify({'message': 'Unauthorized to delete this car'}), 403
     
     db.session.delete(car)
     db.session.commit()
