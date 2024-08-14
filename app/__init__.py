@@ -39,8 +39,10 @@ def create_app():
 
     from app.blueprints.auth import bp as auth_bp
     from app.blueprints.cars import bp as cars_bp
+    from app.blueprints.api.routes import bp as api_bp  
 
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(cars_bp, url_prefix='/cars')
+    app.register_blueprint(api_bp, url_prefix='/api')
 
     return app

@@ -11,7 +11,7 @@ from . import bp
 @login_required
 def profile():
     user_cars = Car.query.filter_by(user_id=current_user.id).all()
-    return render_template('auth/profile.html', user=current_user, cars=user_cars)
+    return render_template('auth/profile.html', user=current_user, cars=user_cars, api_token=current_user.api_token)
 
 @bp.route('/signup', methods=['GET', 'POST'])
 def signup():

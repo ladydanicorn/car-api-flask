@@ -12,6 +12,7 @@ class User(UserMixin, db.Model):
     last_name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    api_token = db.Column(db.String(36), unique=True, default=lambda: str(uuid.uuid4()))
     cars = db.relationship('Car', backref='owner', lazy=True)
 
 class Car(db.Model):
